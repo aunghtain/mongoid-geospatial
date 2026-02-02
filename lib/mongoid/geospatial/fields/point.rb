@@ -234,6 +234,8 @@ module Mongoid
         def from_hash(hsh)
           raise 'Hash must have at least 2 items' if hsh.size < 2
 
+          return hsh if hsh[:type] && hsh[:coordinates] && hsh[:type] == 'Point' && hsh[:coordinates].is_a?(Array)
+          
           [from_hash_x(hsh), from_hash_y(hsh)]
         end
 
